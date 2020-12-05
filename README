@@ -1,0 +1,5 @@
+Makefile do budowy rpm w całości w dowolnym katalogu tempowym
+
+Wywołanie:
+	make rpm
+buduje rpm-a i kopiuje gotowe .rpm do bieżacego katalogu po zakończeniu
