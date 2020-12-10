@@ -3,9 +3,9 @@
 # Seweryn Walentynowicz <S.Walentynowicz@walor.torun.pl>
 # 2020.12.05	initial release
 
-PACKAGE = re2c
-VERSION = 0.13.5
-RELEASE = 9
+PACKAGE = mantis
+VERSION = 1.2.19
+RELEASE = 11
 
 distdir = $(PACKAGE)-$(VERSION)
 top_srcdir = .
@@ -52,7 +52,7 @@ rpm-local:
 	mkdir -p $(rpmbuild)/SPECS && \
 	cp ${RPM_SPEC_DIR}/$(rpmspec) $(rpmbuild)/SPECS && \
 	mkdir -p $(rpmbuild)/SOURCES && \
-	cp ${RPM_SOURCES_DIR}/$(distdir).tar.gz $(rpmbuild)/SOURCES)
+	cp ${RPM_SOURCES_DIR}/* $(rpmbuild)/SOURCES)
 
 srpm-common:
 	@(dist=`$(RPM) --eval %{?dist}`; \

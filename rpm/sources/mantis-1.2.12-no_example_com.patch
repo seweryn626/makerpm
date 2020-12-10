@@ -1,0 +1,19 @@
+diff -u -aur mantisbt-1.2.12.orig/config_inc.php.sample mantisbt-1.2.12/config_inc.php.sample
+--- mantisbt-1.2.12.orig/config_inc.php.sample	2012-11-12 00:10:40.000000000 +0100
++++ mantisbt-1.2.12/config_inc.php.sample	2012-11-15 00:27:19.247430384 +0100
+@@ -51,10 +51,10 @@
+ $g_smtp_host			= 'localhost';			# used with PHPMAILER_METHOD_SMTP
+ $g_smtp_username		= '';					# used with PHPMAILER_METHOD_SMTP
+ $g_smtp_password		= '';					# used with PHPMAILER_METHOD_SMTP
+-$g_administrator_email  = 'administrator@example.com';
+-$g_webmaster_email      = 'webmaster@example.com';
+-$g_from_email           = 'noreply@example.com';	# the "From: " field in emails
+-$g_return_path_email    = 'admin@example.com';	# the return address for bounced mail
++$g_administrator_email  = 'administrator@localhost';
++$g_webmaster_email      = 'webmaster@localhost';
++$g_from_email           = 'noreply@localhost';	# the "From: " field in emails
++$g_return_path_email    = 'admin@localhost';	# the return address for bounced mail
+ # $g_from_name			= 'Mantis Bug Tracker';
+ # $g_email_receive_own	= OFF;
+ # $g_email_send_using_cronjob = OFF;
+Only in mantisbt-1.2.12: .config_inc.php.sample.swp

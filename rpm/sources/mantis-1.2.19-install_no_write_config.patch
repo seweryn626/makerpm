@@ -1,0 +1,144 @@
+diff --git a/admin/install.php b/admin/install.php
+index 6a57a88..9c619c0 100644
+--- a/admin/install.php
++++ b/admin/install.php
+@@ -411,10 +411,18 @@ if( 1 == $t_install_state ) {
+ <?php if( !$g_database_upgrade ) {?>
+ <tr>
+ 	<td>
++		<div style="background-color: #FCC; padding: 5px; border: 1px solid red;">
++		To change any of the disabled options below, edit /etc/mantis/config_inc.php and reload this page!
++		</div>
++	</td>
++</tr>
++
++<tr>
++	<td>
+ 		Type of Database
+ 	</td>
+ 	<td>
+-		<select name="db_type">
++		<select disabled="true" name="db_type">
+ 		<?php
+ 			// Build selection list of available DB types
+ 			$t_db_list = array(
+@@ -450,7 +458,7 @@ if( !$g_database_upgrade ) {?>
+ 		Hostname (for Database Server)
+ 	</td>
+ 	<td>
+-		<input name="hostname" type="textbox" value="<?php echo string_attribute( $f_hostname ) ?>">
++		<input name="hostname" type="textbox" disabled="disabled" value="<?php echo string_attribute( $f_hostname ) ?>">
+ 	</td>
+ </tr>
+ <?php
+@@ -462,7 +470,7 @@ if( !$g_database_upgrade ) {?>
+ 		Username (for Database)
+ 	</td>
+ 	<td>
+-		<input name="db_username" type="textbox" value="<?php echo string_attribute( $f_db_username ) ?>">
++		<input name="db_username" type="textbox" disabled="disabled" value="<?php echo string_attribute( $f_db_username ) ?>">
+ 	</td>
+ </tr>
+ <?php
+@@ -486,7 +494,7 @@ if( !$g_database_upgrade ) {?>
+ 		Database name (for Database)
+ 	</td>
+ 	<td>
+-		<input name="database_name" type="textbox" value="<?php echo string_attribute( $f_database_name ) ?>">
++		<input name="database_name" type="textbox" disabled="disabled" value="<?php echo string_attribute( $f_database_name ) ?>">
+ 	</td>
+ </tr>
+ <?php
+@@ -785,91 +793,9 @@ if( 4 == $t_install_state ) {
+ if( 5 == $t_install_state ) {
+ 	$t_config_filename = $g_absolute_path . 'config_inc.php';
+ 	$t_config_exists = file_exists( $t_config_filename );
+-	?>
+-<table width="100%" border="0" cellpadding="10" cellspacing="1">
+-<tr>
+-	<td bgcolor="#e8e8e8" colspan="2">
+-		<span class="title">Write Configuration File(s)</span>
+-	</td>
+-</tr>
+ 
+-<tr>
+-	<td bgcolor="#ffffff">
+-		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' )
+-			. ' Configuration File (config_inc.php)'; ?>
+-	</td>
+-	<?php
+-	# Generating the config_inc.php file
+-
+-	$t_config = '<?php' . "\r\n";
+-	$t_config .= "\$g_hostname = '$f_hostname';\r\n";
+-	$t_config .= "\$g_db_type = '$f_db_type';\r\n";
+-	$t_config .= "\$g_database_name = '$f_database_name';\r\n";
+-	$t_config .= "\$g_db_username = '$f_db_username';\r\n";
+-	$t_config .= "\$g_db_password = '$f_db_password';\r\n";
+-
+-	if( $f_db_type == 'db2' ) {
+-		$t_config .= "\$g_db_schema = '$f_db_schema';\r\n";
+-	}
+-
+-	$t_write_failed = true;
+-
+-	if( !$t_config_exists ) {
+-		if( $fd = @fopen( $t_config_filename, 'w' ) ) {
+-			fwrite( $fd, $t_config );
+-			fclose( $fd );
+-		}
++        // FEDORA PATCH: Removed config_inc.php manipulation code
+ 
+-		if( file_exists( $t_config_filename ) ) {
+-			print_test_result( GOOD );
+-			$t_write_failed = false;
+-		} else {
+-			print_test_result( BAD, false, 'cannot write ' . $t_config_filename );
+-		}
+-	} else {
+-		# already exists, see if the information is the same
+-		if ( ( $f_hostname != config_get( 'hostname', '' ) ) ||
+-			( $f_db_type != config_get( 'db_type', '' ) ) ||
+-			( $f_database_name != config_get( 'database_name', '') ) ||
+-			( $f_db_schema != config_get( 'db_schema', '') ) ||
+-			( $f_db_username != config_get( 'db_username', '' ) ) ||
+-			( $f_db_password != config_get( 'db_password', '' ) ) ) {
+-			print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config_inc.php' . ' already exists and has different settings' );
+-		} else {
+-			print_test_result( GOOD, false );
+-			$t_write_failed = false;
+-		}
+-	}
+-	?>
+-</tr>
+-<?php
+-	if( true == $t_write_failed ) {
+-?>
+-<tr>
+-	<td colspan="2">
+-		<table width="50%" cellpadding="10" cellspacing="1">
+-			<tr>
+-				<td>
+-					Please add the following lines to
+-					<em>'<?php echo $g_absolute_path; ?>config_inc.php'</em>
+-					before continuing:
+-				</td>
+-			</tr>
+-			<tr>
+-				<td>
+-					<pre><?php echo htmlentities( $t_config ); ?></pre>
+-				</td>
+-			</tr>
+-		</table>
+-	</td>
+-</tr>
+-<?php
+-	}
+-	?>
+-
+-</table>
+-
+-<?php
+ 	if( false == $g_failed ) {
+ 		$t_install_state++;
+ 	}

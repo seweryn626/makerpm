@@ -1,0 +1,12 @@
+diff -u -aur mantisbt-1.2.12.orig/core/email_api.php mantisbt-1.2.12/core/email_api.php
+--- mantisbt-1.2.12.orig/core/email_api.php	2012-11-12 00:10:40.000000000 +0100
++++ mantisbt-1.2.12/core/email_api.php	2012-11-15 00:34:41.010358106 +0100
+@@ -53,7 +53,7 @@
+ /**
+  * requires PHPMailer library
+  */
+-require_once( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
++require_once( 'PHPMailer/class.phpmailer.php' );
+ 
+ /**
+  * reusable object of class SMTP

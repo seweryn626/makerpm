@@ -1,0 +1,26 @@
+diff --git a/scripts/checkin.php b/scripts/checkin.php
+index 054d48a..bca3b99 100644
+--- a/scripts/checkin.php
++++ b/scripts/checkin.php
+@@ -17,6 +17,8 @@
+ # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ # See the README and LICENSE files for details
+ 
++putenv('MANTIS_CONFIG=/etc/mantis/config_inc.php');
++
+ global $g_bypass_headers;
+ $g_bypass_headers = 1;
+ require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+diff --git a/scripts/send_emails.php b/scripts/send_emails.php
+index b6dce6e..7b9eae6 100644
+--- a/scripts/send_emails.php
++++ b/scripts/send_emails.php
+@@ -17,6 +17,8 @@
+ # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ # See the README and LICENSE files for details
+ 
++putenv('MANTIS_CONFIG=/etc/mantis/config_inc.php');
++
+ global $g_bypass_headers;
+ $g_bypass_headers = 1;
+ 

@@ -1,0 +1,82 @@
+= Fedora specific installation notes =
+
+== Database ==
+
+Mantis requires a database to function; use the following steps to
+configure mantis to work with MySQL:
+
+1. install MySQL packages
+    yum install mysql-server php-mysql
+
+2. start MySQL server 
+    service mysqld start
+
+WARNING: the default MySQL configuration has a "root" account with no password.
+         Please have a look to the MySQL documentation to add a proper password
+         and/or a separate account for mantis usage.
+
+
+== Configuration files ==
+
+The mantis configuration file is /etc/mantis/config_inc.php.
+
+Be sure to check the file /usr/share/mantis/config_defaults_inc.php for the 
+full list of available configuration options.
+
+
+== First time operations ==
+
+1. allow yourelf to access the admin directory
+    Please note that the provided configuration file for Apache 
+    (/etc/httpd/conf.d/mantis.conf) by default prevents access to the mantis
+    administration area. 
+    Find the section:
+        <Directory /usr/share/mantis/admin>
+
+    and change the "None" in:
+        Allow from None
+    
+    to the machine IP you will be connecting from. For instance:
+        Allow from 127.0.0.1
+
+    allows localhost access to the admin area
+    
+    then restart apache with:
+      service httpd restart
+
+2. point your browser to:
+      https://localhost/mantis/admin/install.php
+   to create an empty DB.
+
+BIG FAT WARNING: when you are done with the installation, be sure to revert the 
+         modifications you've done in step 1.
+         Otherwise you will leave the administration area unprotected with
+         critical system information and database update capabilities open to 
+         any unauthorized person.
+
+WARNING: A DEFAULT ADMINISTRATOR level account is created.  The account name
+         and password are administrator / root.  Use this when you first login 
+         to Mantis. Immediately go to Manage and create at least one
+         administrator level account.  Immediately after that, DISABLE or DELETE
+         the administrator account. You can recreate it but you should delete
+         the account to prevent the cookie_string from being used to trick the
+         package. REMEMBER: After setting up the package, REMOVE the
+         default administrator account.
+
+== Upgrades ==
+
+After a version upgrade that involves changes to the DB schema, you will need
+to run again the installer steps as outlined above. The installer is able to
+recognize which modifications are needed and apply them to the DB.
+
+Albeit the upgrade routine is usually well tested and safe, please 
+consider doing a complete backup of the database before attempting the
+procedure.
+
+
+== SELinux ==
+
+The default SELinux configuration prevents the httpd process (hence mantis)
+from sending emails. This is easily fixed with:
+
+    setsebool -P httpd_can_sendmail=1
