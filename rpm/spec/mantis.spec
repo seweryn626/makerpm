@@ -6,7 +6,7 @@
 Summary:    Web-based issue tracking system
 Name:       mantis
 Version:    1.2.19
-Release:    11%{?dist}
+Release:    11sw1%{?dist}
 License:    GPLv2+
 URL:        http://www.mantisbt.org/
 BuildArch:  noarch
@@ -149,6 +149,10 @@ rm -rf ${RPM_BUILD_ROOT}%{pkgdir}/doc
 
 
 %changelog
+* Thu Dec 10 2020 Seweryn Walentynowicz <Seweryn.Walenyunowicz@frakoterm.pl> - 1.2.19-11sw1
+- remove php_flag from httpd config if not PHP5 detected
+- defaults to on for address rewriting to https
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.2.19-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 

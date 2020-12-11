@@ -5,7 +5,7 @@
 
 PACKAGE = mantis
 VERSION = 1.2.19
-RELEASE = 11
+RELEASE = 11sw1
 
 distdir = $(PACKAGE)-$(VERSION)
 top_srcdir = .
